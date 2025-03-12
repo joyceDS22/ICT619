@@ -177,15 +177,15 @@ model_instance = PredictionModel()
 # Title of the app
 st.title("Diabetes Risk Prediction")
     
-# Get user inputs
-age = st.number_input("Age", min_value=0, max_value=120, value=25)
-bmi = st.number_input("BMI", min_value=10.0, max_value=100.0, value=30.0)
-pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=2)
-glucose = st.number_input("Glucose", min_value=0, max_value=300, value=90)
-insulin = st.number_input("Insulin", min_value=0, max_value=900, value=85)
-blood_pressure = st.number_input("Blood Pressure", min_value=0, max_value=200, value=80)
-DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
-SkinThickness = st.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
+# Get user inputs from the sidebar
+age = st.sidebar.number_input("Age", min_value=0, max_value=120, value=25)
+bmi = st.sidebar.number_input("BMI", min_value=10.0, max_value=100.0, value=30.0)
+pregnancies = st.sidebar.number_input("Pregnancies", min_value=0, max_value=20, value=2)
+glucose = st.sidebar.number_input("Glucose", min_value=0, max_value=300, value=90)
+insulin = st.sidebar.number_input("Insulin", min_value=0, max_value=900, value=85)
+blood_pressure = st.sidebar.number_input("Blood Pressure", min_value=0, max_value=200, value=80)
+DiabetesPedigreeFunction = st.sidebar.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
+SkinThickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
     
 
 # When user presses the button to get the result
