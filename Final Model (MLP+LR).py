@@ -12,7 +12,7 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import VotingClassifier
 from scipy.stats import shapiro
-
+from PIL import Image
 from sklearn.model_selection import train_test_split,cross_val_score
 
 from sklearn.model_selection import RandomizedSearchCV,StratifiedKFold, GridSearchCV
@@ -176,6 +176,17 @@ model_instance = PredictionModel()
 
 # Title of the app
 st.title("Diabetes Risk Prediction")
+
+image_to_center = Image.open('diabetes.png')  # Replace with your image file
+
+# Center the image using HTML and CSS
+st.markdown(
+    f"""
+    <div style="display: flex; justify-content: center;">
+        <img src="{image_to_center}" style="width: 50%;"/>
+    </div>
+    """, unsafe_allow_html=True
+)
     
 # Get user inputs
 age = st.number_input("Age", min_value=0, max_value=120, value=25)
