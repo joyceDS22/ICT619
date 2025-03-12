@@ -227,6 +227,14 @@ if st.button("Predict Risk"):
     st.write(f"Diabetes Risk Prediction: {result['Category']}")
     st.write(f"Probability: {result['Probability(%)']}%")
 
+    # Plot ROC Curve
+    st.subheader("ROC Curve")
+    model_instance.plot_roc_curve()
+
+    # Plot Confusion Matrix
+    st.subheader("Confusion Matrix")
+    model_instance.plot_confusion_matrix()
+
 
 
 
