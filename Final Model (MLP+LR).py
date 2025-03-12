@@ -196,48 +196,6 @@ def get_user_inputs():
     }
     return user_inputs
 
-# Function to visualize feature distribution
-def plot_feature_distribution(feature):
-    st.subheader(f"Distribution of {feature}")
-    plt.figure(figsize=(8, 4))
-    sns.histplot(model_instance.df[feature], kde=True, color='blue')
-    st.pyplot()
-
-# Get the user inputs
-user_inputs = get_user_inputs()
-
-# Dropdown for selecting which feature the user wants to visualize
-feature_to_plot = st.sidebar.selectbox(
-    "Select a feature to visualize",
-    ["age", "bmi", "pregnancies", "glucose", "insulin", "blood_pressure", "DiabetesPedigreeFunction", "SkinThickness"]
-)
-
-# When user presses the button to get the result
-if st.button("Predict Risk"):
-    result = model_instance.predict_diabetes_risk_from_user_input(
-        age=user_inputs['age'],
-        bmi=user_inputs['bmi'],
-        pregnancies=user_inputs['pregnancies'],
-        glucose=user_inputs['glucose'],
-        insulin=user_inputs['insulin'],
-        blood_pressure=user_inputs['blood_pressure'],
-        DiabetesPedigreeFunction=user_inputs['DiabetesPedigreeFunction'],
-        SkinThickness=user_inputs['SkinThickness']
-    )
-    st.write(f"Diabetes Risk Prediction: {result['Category']}")
-    st.write(f"Probability: {result['Probability(%)']}%")
-
-    # Visualizing the prediction probability as the user inputs values
-    fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot([user_inputs['age'], user_inputs['bmi'], user_inputs['pregnancies'],
-             user_inputs['glucose'], user_inputs['insulin'], user_inputs['blood_pressure'],
-             user_inputs['DiabetesPedigreeFunction'], user_inputs['SkinThickness']],
-            label='User Input Values', marker='o', color='r')
-    ax.set_title("Feature Values vs Prediction Probability")
-    ax.set_ylabel('Prediction Probability (%)')
-    ax.set_xticks(range(8))
-    ax.set_xticklabels(['Age', 'BMI', 'Pregnancies', 'Glucose', 'Insulin', 'BP', 'DPF', 'SkinThickness'])
-    st.pyplot(fig)
 
     
 
