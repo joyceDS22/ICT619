@@ -177,17 +177,6 @@ model_instance = PredictionModel()
 # Title of the app
 st.title("Diabetes Risk Prediction")
 
-image_to_center = 'https://github.com/joyceDS22/ICT619'.git  # Replace with your image file
-
-# Center the image using HTML and CSS
-st.markdown(
-    f"""
-    <div style="display: flex; justify-content: center;">
-        <img src="{image_to_center}" style="width: 50%;"/>
-    </div>
-    """, unsafe_allow_html=True
-)
-    
 # Get user inputs
 age = st.number_input("Age", min_value=0, max_value=120, value=25)
 bmi = st.number_input("BMI", min_value=10.0, max_value=100.0, value=30.0)
