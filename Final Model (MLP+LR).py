@@ -173,8 +173,31 @@ class PredictionModel:
 
 model_instance = PredictionModel()
 
+# Get user inputs
+age = st.number_input("Age", min_value=0, max_value=120, value=25)
+bmi = st.number_input("BMI", min_value=10.0, max_value=100.0, value=30.0)
+pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=2)
+glucose = st.number_input("Glucose", min_value=0, max_value=300, value=90)
+insulin = st.number_input("Insulin", min_value=0, max_value=900, value=85)
+blood_pressure = st.number_input("Blood Pressure", min_value=0, max_value=200, value=80)
+DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
+SkinThickness = st.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
+    
 
-
+# When user presses the button to get the result
+if st.button("Predict Risk"):
+    result = model_instance.predict_diabetes_risk_from_user_input(
+        age=age,
+        bmi=bmi,
+        pregnancies=pregnancies,
+        glucose=glucose,
+        insulin=insulin,
+        blood_pressure=blood_pressure,
+        DiabetesPedigreeFunction=DiabetesPedigreeFunction,
+        SkinThickness=SkinThickness
+    )
+    st.write(f"Diabetes Risk Prediction: {result['Category']}")
+    st.write(f"Probability: {result['Probability(%)']}%")
 
 
 
