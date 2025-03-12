@@ -26,7 +26,7 @@ from imblearn.over_sampling import SMOTE
 from collections import Counter
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.utils import resample
-
+from PIL import Image
 
 
 class PredictionModel:
@@ -174,6 +174,9 @@ class PredictionModel:
 model_instance = PredictionModel()
 # Title of the app
 st.title("DiaSense Diabetes Risk Prediction")
+# Load and display an image from a local file
+image = Image.open('diabetes.ppg')  # Replace with your image path
+st.image(image, caption='This is an image', use_column_width=True
 
 # Get user inputs
 age = st.number_input("Age", min_value=0, max_value=120, value=25)
