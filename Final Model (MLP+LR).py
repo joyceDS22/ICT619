@@ -12,7 +12,6 @@ from sklearn.neural_network import MLPClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import VotingClassifier
 from scipy.stats import shapiro
-from PIL import Image
 from sklearn.model_selection import train_test_split,cross_val_score
 
 from sklearn.model_selection import RandomizedSearchCV,StratifiedKFold, GridSearchCV
@@ -188,7 +187,6 @@ DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_val
 SkinThickness = st.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
     
 
-
 # When user presses the button to get the result
 if st.button("Predict Risk"):
     result = model_instance.predict_diabetes_risk_from_user_input(
@@ -203,6 +201,8 @@ if st.button("Predict Risk"):
     )
     st.write(f"Diabetes Risk Prediction: {result['Category']}")
     st.write(f"Probability: {result['Probability(%)']}%")
+
+
 
 
 
