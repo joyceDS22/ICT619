@@ -198,16 +198,17 @@ feature_to_plot = st.sidebar.selectbox(
 def plot_feature_distribution(feature):
     st.subheader(f"Distribution of {feature}")
     
-    # Get the index of the selected feature
+    # Get the index of the selected feature in the original DataFrame (X_1)
     feature_index = model_instance.X_1.columns.get_loc(feature)
 
-    # Access the scaled version of the feature
+    # Access the scaled version of the feature in X_1_scaled using the feature index
     scaled_feature = model_instance.X_1_scaled[:, feature_index]
     
     # Plot the scaled feature distribution
     plt.figure(figsize=(8, 4))
     sns.histplot(scaled_feature, kde=True, color='blue')
     st.pyplot()
+
 # Show the feature distribution plot when the user selects a feature
 plot_feature_distribution(feature_to_plot)
 
