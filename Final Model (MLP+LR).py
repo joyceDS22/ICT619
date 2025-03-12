@@ -174,9 +174,7 @@ class PredictionModel:
 model_instance = PredictionModel()
 # Title of the app
 st.title("DiaSense Diabetes Risk Prediction")
-# Load and display an image from a local file
-image = Image.open('diabetes.ppg')  # Replace with your image path
-st.image(image, use_column_width=True)
+
 
 # Get user inputs
 age = st.number_input("Age", min_value=0, max_value=120, value=25)
