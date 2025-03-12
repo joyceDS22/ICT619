@@ -172,6 +172,8 @@ class PredictionModel:
         return result
 
 model_instance = PredictionModel()
+# Title of the app
+st.title("DiaSense Diabetes Risk Prediction")
 
 # Get user inputs
 age = st.number_input("Age", min_value=0, max_value=120, value=25)
