@@ -194,8 +194,14 @@ feature_to_plot = st.sidebar.selectbox(
     "Select a feature to visualize",
     ["age", "bmi", "pregnancies", "glucose", "insulin", "blood_pressure", "DiabetesPedigreeFunction", "SkinThickness"]
 )
+# Function to visualize feature distribution
 def plot_feature_distribution(feature):
     st.subheader(f"Distribution of {feature}")
+
+    # Check if feature is in the columns of X_1
+    if feature not in model_instance.X_1.columns:
+        st.error(f"Feature '{feature}' not found in the dataset.")
+        return
     
     # Get the index of the selected feature in the original DataFrame (X_1)
     feature_index = model_instance.X_1.columns.get_loc(feature)
