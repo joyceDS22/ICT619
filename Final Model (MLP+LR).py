@@ -82,13 +82,6 @@ class PredictionModel:
         #Perform Prediction on MLP+LR
         self.y_test_prob_mlp_lr_final = self.voting_mlp_lr_model_final.predict_proba(self.X_test_PCA)[:, 1]  
         self.y_test_pred_mlp_lr_final = self.voting_mlp_lr_model_final.predict(self.X_test_PCA)  
-        # Model Serialization
-        with open('voting_classifier_mlp_lr_final.pkl', 'wb') as f:
-            pickle.dump(self.voting_mlp_lr_model_final, f)
-        # Loading the model from the pickle file
-        with open('voting_classifier_mlp_lr_final.pkl', 'rb') as f:
-            loaded_model = pickle.load(f)
-        
         # Risk Threshold = 0.48
         self.fpr, self.tpr, self.thresholds = roc_curve(self.y_test_PCA, self.y_test_prob_mlp_lr_final)
         self.roc_auc = auc(self.fpr, self.tpr)        
