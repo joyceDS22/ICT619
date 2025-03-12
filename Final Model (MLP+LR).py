@@ -173,7 +173,6 @@ class PredictionModel:
         return result
 
 model_instance = PredictionModel()
-st.write("Columns in X_1:", model_instance.X_1.columns)
 
 # Title of the app
 st.title("Diabetes Risk Prediction")
