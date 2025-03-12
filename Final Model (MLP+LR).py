@@ -189,34 +189,6 @@ DiabetesPedigreeFunction = st.sidebar.number_input("Diabetes Pedigree Function",
 SkinThickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
     
 
-# Dropdown for selecting which feature the user wants to visualize
-feature_to_plot = st.sidebar.selectbox(
-    "Select a feature to visualize",
-    ["Age", "BMI", "Pregnancies", "Glucose", "Insulin", "Blood Pressure", "Diabetes Pedigree Function", "Skin Thickness"]
-)
-# Function to visualize feature distribution
-def plot_feature_distribution(feature):
-    st.subheader(f"Distribution of {feature}")
-
-    # Check if feature is in the columns of X_1
-    if feature not in model_instance.X_1.columns:
-        st.error(f"Feature '{feature}' not found in the dataset.")
-        return
-    
-    # Get the index of the selected feature in the original DataFrame (X_1)
-    feature_index = model_instance.X_1.columns.get_loc(feature)
-
-    # Access the scaled version of the feature in X_1_scaled using the feature index
-    scaled_feature = model_instance.X_1_scaled[:, feature_index]
-    
-    # Plot the scaled feature distribution
-    plt.figure(figsize=(8, 4))
-    sns.histplot(scaled_feature, kde=True, color='blue')
-    st.pyplot()
-
-
-# Show the feature distribution plot when the user selects a feature
-plot_feature_distribution(feature_to_plot)
 
 # When user presses the button to get the result
 if st.button("Predict Risk"):
@@ -233,13 +205,6 @@ if st.button("Predict Risk"):
     st.write(f"Diabetes Risk Prediction: {result['Category']}")
     st.write(f"Probability: {result['Probability(%)']}%")
 
-    # Plot ROC Curve
-    st.subheader("ROC Curve")
-    model_instance.plot_roc_curve()
-
-    # Plot Confusion Matrix
-    st.subheader("Confusion Matrix")
-    model_instance.plot_confusion_matrix()
 
 
 
