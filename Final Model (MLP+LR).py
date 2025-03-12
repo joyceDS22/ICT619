@@ -188,6 +188,22 @@ DiabetesPedigreeFunction = st.sidebar.number_input("Diabetes Pedigree Function",
 SkinThickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
     
 
+# Dropdown for selecting which feature the user wants to visualize
+feature_to_plot = st.sidebar.selectbox(
+    "Select a feature to visualize",
+    ["age", "bmi", "pregnancies", "glucose", "insulin", "blood_pressure", "DiabetesPedigreeFunction", "SkinThickness"]
+)
+
+# Function to visualize feature distribution
+def plot_feature_distribution(feature):
+    st.subheader(f"Distribution of {feature}")
+    plt.figure(figsize=(8, 4))
+    sns.histplot(model_instance.df[feature], kde=True, color='blue')
+    st.pyplot()
+
+# Show the feature distribution plot when the user selects a feature
+plot_feature_distribution(feature_to_plot)
+
 # When user presses the button to get the result
 if st.button("Predict Risk"):
     result = model_instance.predict_diabetes_risk_from_user_input(
@@ -203,10 +219,6 @@ if st.button("Predict Risk"):
     st.write(f"Diabetes Risk Prediction: {result['Category']}")
     st.write(f"Probability: {result['Probability(%)']}%")
 
-
-    
-
-    
 
 
 
