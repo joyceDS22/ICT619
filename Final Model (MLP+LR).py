@@ -192,7 +192,7 @@ SkinThickness = st.sidebar.number_input("Skin Thickness", min_value=0, max_value
 # Dropdown for selecting which feature the user wants to visualize
 feature_to_plot = st.sidebar.selectbox(
     "Select a feature to visualize",
-    ["age", "bmi", "pregnancies", "glucose", "insulin", "blood_pressure", "DiabetesPedigreeFunction", "SkinThickness"]
+    ["Age", "BMI", "Pregnancies", "Glucose", "Insulin", "Blood Pressure", "Diabetes Pedigree Function", "Skin Thickness"]
 )
 # Function to visualize feature distribution
 def plot_feature_distribution(feature):
