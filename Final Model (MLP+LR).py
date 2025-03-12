@@ -177,31 +177,67 @@ model_instance = PredictionModel()
 # Title of the app
 st.title("Diabetes Risk Prediction")
     
-# Get user inputs
-age = st.number_input("Age", min_value=0, max_value=120, value=25)
-bmi = st.number_input("BMI", min_value=10.0, max_value=100.0, value=30.0)
-pregnancies = st.number_input("Pregnancies", min_value=0, max_value=20, value=2)
-glucose = st.number_input("Glucose", min_value=0, max_value=300, value=90)
-insulin = st.number_input("Insulin", min_value=0, max_value=900, value=85)
-blood_pressure = st.number_input("Blood Pressure", min_value=0, max_value=200, value=80)
-DiabetesPedigreeFunction = st.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5)
-SkinThickness = st.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
-    
+def get_user_inputs():
+    """
+    Collect user inputs from Streamlit's sidebar.
+
+    Returns:
+        dict: A dictionary with user input values.
+    """
+    user_inputs = {
+        'age': st.sidebar.number_input("Age", min_value=0, max_value=100, value=25),
+        'bmi': st.sidebar.number_input("BMI", min_value=0, max_value=80, value=30.0),
+        'pregnancies': st.sidebar.number_input("Pregnancies", min_value=0, max_value=20, value=2),
+        'glucose': st.sidebar.number_input("Glucose", min_value=0, max_value=200, value=90),
+        'insulin': st.sidebar.number_input("Insulin", min_value=0, max_value=900, value=85),
+        'blood_pressure': st.sidebar.number_input("Blood Pressure", min_value=0, max_value=150, value=80),
+        'DiabetesPedigreeFunction': st.sidebar.number_input("Diabetes Pedigree Function", min_value=0.0, max_value=2.5, value=0.5),
+        'SkinThickness': st.sidebar.number_input("Skin Thickness", min_value=0, max_value=100, value=30)
+    }
+    return user_inputs
+
+# Function to visualize feature distribution
+def plot_feature_distribution(feature):
+    st.subheader(f"Distribution of {feature}")
+    plt.figure(figsize=(8, 4))
+    sns.histplot(model_instance.df[feature], kde=True, color='blue')
+    st.pyplot()
+
+# Get the user inputs
+user_inputs = get_user_inputs()
+
+# Dropdown for selecting which feature the user wants to visualize
+feature_to_plot = st.sidebar.selectbox(
+    "Select a feature to visualize",
+    ["age", "bmi", "pregnancies", "glucose", "insulin", "blood_pressure", "DiabetesPedigreeFunction", "SkinThickness"]
+)
 
 # When user presses the button to get the result
 if st.button("Predict Risk"):
     result = model_instance.predict_diabetes_risk_from_user_input(
-        age=age,
-        bmi=bmi,
-        pregnancies=pregnancies,
-        glucose=glucose,
-        insulin=insulin,
-        blood_pressure=blood_pressure,
-        DiabetesPedigreeFunction=DiabetesPedigreeFunction,
-        SkinThickness=SkinThickness
+        age=user_inputs['age'],
+        bmi=user_inputs['bmi'],
+        pregnancies=user_inputs['pregnancies'],
+        glucose=user_inputs['glucose'],
+        insulin=user_inputs['insulin'],
+        blood_pressure=user_inputs['blood_pressure'],
+        DiabetesPedigreeFunction=user_inputs['DiabetesPedigreeFunction'],
+        SkinThickness=user_inputs['SkinThickness']
     )
     st.write(f"Diabetes Risk Prediction: {result['Category']}")
     st.write(f"Probability: {result['Probability(%)']}%")
+
+    # Visualizing the prediction probability as the user inputs values
+    fig, ax = plt.subplots(figsize=(8, 4))
+    ax.plot([user_inputs['age'], user_inputs['bmi'], user_inputs['pregnancies'],
+             user_inputs['glucose'], user_inputs['insulin'], user_inputs['blood_pressure'],
+             user_inputs['DiabetesPedigreeFunction'], user_inputs['SkinThickness']],
+            label='User Input Values', marker='o', color='r')
+    ax.set_title("Feature Values vs Prediction Probability")
+    ax.set_ylabel('Prediction Probability (%)')
+    ax.set_xticks(range(8))
+    ax.set_xticklabels(['Age', 'BMI', 'Pregnancies', 'Glucose', 'Insulin', 'BP', 'DPF', 'SkinThickness'])
+    st.pyplot(fig)
 
     
 
