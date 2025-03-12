@@ -1,10 +1,10 @@
-%pip install scikit-learn
-%pip install imbalanced-learn
-%pip install numpy
-%pip install matplotlib
-%pip install seaborn
-%pip install pandas
-%pip install torch
+pip install scikit-learn
+pip install imbalanced-learn
+pip install numpy
+pip install matplotlib
+pip install seaborn
+pip install pandas
+pip install torch
 
 import numpy as np
 import matplotlib.pyplot as plt
