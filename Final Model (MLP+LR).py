@@ -177,7 +177,7 @@ model_instance = PredictionModel()
 # Title of the app
 st.title("Diabetes Risk Prediction")
 
-image_to_center = Image.open('diabetes.png')  # Replace with your image file
+image_to_center = 'https://github.com/joyceDS22/ICT619'.git  # Replace with your image file
 
 # Center the image using HTML and CSS
 st.markdown(
